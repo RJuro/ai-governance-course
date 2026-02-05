@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Governance and Ethics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&family=Caveat:wght@500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #2A2320;
+      --bg-warm: #342D29;
+      --bg-card: #3D3632;
+      --coral: #E8734A;
+      --coral-light: #F5A17A;
+      --cream: #F5F0EB;
+      --cream-muted: #D4CEC8;
+      --text-light: #E8E4E0;
+      --text-muted: #9A938D;
+      --gold: #C9A96E;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* Subtle grain texture */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.03;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Header */
+    header {
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.02em;
+    }
+
+    .logo span {
+      color: var(--coral);
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-left: 2rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--cream);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 6rem 0 5rem;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 700px;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--coral);
+    }
+
+    .hero-subtitle {
+      font-family: 'Caveat', cursive;
+      font-size: 1.75rem;
+      color: var(--coral-light);
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin-bottom: 2rem;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 1.75rem;
+      background: var(--coral);
+      color: var(--bg-dark);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--coral-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--text-muted);
+      color: var(--text-light);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--cream);
+      background: transparent;
+    }
+
+    /* Info bar */
+    .info-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 4rem 0;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .info-item {
+      background: var(--bg-warm);
+      padding: 1.5rem 1.75rem;
+    }
+
+    .info-item span {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .info-item strong {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--cream);
+    }
+
+    /* Section headers */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .section-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--cream);
+    }
+
+    .section-header .accent {
+      font-family: 'Caveat', cursive;
+      font-size: 1.25rem;
+      color: var(--coral);
+    }
+
+    /* Timeline */
+    .timeline {
+      margin: 3rem 0 4rem;
+    }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .timeline-grid::before {
+      content: '';
+      position: absolute;
+      top: 1.5rem;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--coral), var(--gold));
+    }
+
+    .timeline-item {
+      text-align: center;
+      padding: 0 0.5rem;
+    }
+
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+      background: var(--coral);
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 0 4px var(--bg-dark);
+    }
+
+    .timeline-item:last-child .timeline-dot {
+      background: var(--gold);
+      width: 16px;
+      height: 16px;
+    }
+
+    .timeline-date {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--cream);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Topics grid */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.25rem;
+      margin: 2rem 0 4rem;
+    }
+
+    .topic-card {
+      background: var(--bg-card);
+      border-radius: 4px;
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+
+    .topic-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--coral);
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+    }
+
+    .topic-card:hover {
+      background: var(--bg-warm);
+      transform: translateY(-2px);
+    }
+
+    .topic-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .topic-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      color: var(--coral);
+      opacity: 0.3;
+      position: absolute;
+      top: 0.5rem;
+      right: 1rem;
+      line-height: 1;
+    }
+
+    .topic-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+      padding-right: 2rem;
+    }
+
+    .topic-card .author {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .topic-card .reading {
+      font-size: 0.8rem;
+      color: var(--coral-light);
+    }
+
+    /* Deliverables */
+    .deliverables {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0 4rem;
+    }
+
+    .deliverable {
+      position: relative;
+      padding-left: 1.5rem;
+      border-left: 2px solid var(--coral);
+    }
+
+    .deliverable h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 0.75rem;
+    }
+
+    .deliverable p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Updates section */
+    .updates {
+      background: var(--bg-warm);
+      border-radius: 4px;
+      padding: 2rem;
+      margin: 3rem 0;
+    }
+
+    .updates h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .updates h3::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--coral);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .updates ul {
+      list-style: none;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .updates li {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .updates li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--coral);
+    }
+
+    .updates li strong {
+      color: var(--text-light);
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 4rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Topic pages */
+    .topic-page {
+      padding: 4rem 0;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--coral);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      transition: gap 0.2s;
+    }
+
+    .back-link:hover {
+      gap: 0.75rem;
+    }
+
+    .topic-hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: start;
+      margin-bottom: 3rem;
+    }
+
+    .topic-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.15;
+    }
+
+    .topic-meta {
+      text-align: right;
+    }
+
+    .topic-meta .number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 6rem;
+      font-weight: 600;
+      color: var(--coral);
+      opacity: 0.2;
+      line-height: 1;
+    }
+
+    .reading-box {
+      background: var(--bg-warm);
+      border-radius: 4px;
+      padding: 2rem;
+      margin: 2rem 0;
+      border-left: 4px solid var(--coral);
+    }
+
+    .reading-box h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+
+    .reading-box p {
+      margin: 0.35rem 0;
+      color: var(--text-muted);
+    }
+
+    .reading-box a {
+      color: var(--coral-light);
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .reading-box a:hover {
+      text-decoration: underline;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin: 3rem 0 1.25rem;
+    }
+
+    h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin: 2rem 0 0.75rem;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    ul, ol {
+      color: var(--text-muted);
+      margin: 1rem 0;
+      padding-left: 1.25rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    li strong {
+      color: var(--text-light);
+    }
+
+    a {
+      color: var(--coral-light);
+    }
+
+    .questions ol {
+      counter-reset: q;
+      list-style: none;
+      padding: 0;
+    }
+
+    .questions li {
+      counter-increment: q;
+      padding: 1rem 0 1rem 3rem;
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .questions li::before {
+      content: counter(q);
+      position: absolute;
+      left: 0;
+      top: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--coral);
+      opacity: 0.6;
+    }
+
+    .note-box {
+      background: rgba(232, 115, 74, 0.1);
+      border: 1px solid rgba(232, 115, 74, 0.3);
+      border-radius: 4px;
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+      font-size: 0.95rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .timeline-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .timeline-grid::before {
+        display: none;
+      }
+
+      .timeline-item {
+        text-align: left;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .timeline-dot {
+        margin: 0;
+        flex-shrink: 0;
+      }
+
+      .topics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topic-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .topic-meta {
+        display: none;
+      }
+
+      nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <div class="logo">AI <span>Governance</span></div>
+      <nav>
+        <a href="#timeline">Timeline</a>
+        <a href="#topics">Topics</a>
+        <a href="#deliverables">Deliverables</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-content">
+        <p class="hero-subtitle">Policy Brief Project</p>
+        <h1>AI Governance<br>and <em>Ethics</em></h1>
+        <p>Become an expert on one governance topic. Write a policy brief for Denmark's Minister for Digitization. Present your findings.</p>
+        <div class="cta-row">
+          <a href="#topics" class="btn">View Topics ↓</a>
+          <a href="#deliverables" class="btn btn-ghost">Deliverables</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="info-bar">
+      <div class="info-item">
+        <span>Course</span>
+        <strong>MSc Business Data Science</strong>
+      </div>
+      <div class="info-item">
+        <span>Group Size</span>
+        <strong>3–4 Students</strong>
+      </div>
+      <div class="info-item">
+        <span>Brief Length</span>
+        <strong>2,000–3,000 words</strong>
+      </div>
+      <div class="info-item">
+        <span>Presentation</span>
+        <strong>15–20 minutes</strong>
+      </div>
+    </div>
+
+    <section class="timeline" id="timeline">
+      <div class="section-header">
+        <h2>Timeline</h2>
+        <span class="accent">Three weeks to go</span>
+      </div>
+      <div class="timeline-grid">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Feb 6</div>
+          <div class="timeline-label">Kickoff &<br>Topic Claiming</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Feb 6–12</div>
+          <div class="timeline-label">Initial Research<br>(2–3 days)</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Feb 13–19</div>
+          <div class="timeline-label">Draft<br>Policy Brief</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Feb 20–25</div>
+          <div class="timeline-label">Finalize<br>Brief & Slides</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Feb 26</div>
+          <div class="timeline-label">Presentations</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="topics">
+      <div class="section-header">
+        <h2>The 8 Topics</h2>
+        <span class="accent">Choose your focus</span>
+      </div>
+      <div class="topics-grid">
+        <a href="topic1.html" class="topic-card">
+          <span class="topic-number">01</span>
+          <h3>AI Risk Frameworks</h3>
+          <p class="author">Amodei, "The Adolescence of Technology"</p>
+          <p class="reading">~7,500 words · Anthropic CEO on AI safety</p>
+        </a>
+        <a href="topic2.html" class="topic-card">
+          <span class="topic-number">02</span>
+          <h3>AI and Work Obsolescence</h3>
+          <p class="author">Balwit, "My Last Five Years of Work"</p>
+          <p class="reading">~4,500 words · Personal essay on AI displacement</p>
+        </a>
+        <a href="topic3.html" class="topic-card">
+          <span class="topic-number">03</span>
+          <h3>AI as Normal Technology</h3>
+          <p class="author">Narayanan & Kapoor, "AI as Normal Technology"</p>
+          <p class="reading">~6,500 words · Counter-narrative to AI hype</p>
+        </a>
+        <a href="topic4.html" class="topic-card">
+          <span class="topic-number">04</span>
+          <h3>Geopolitical Competition</h3>
+          <p class="author">Aschenbrenner, "The Free World Must Prevail"</p>
+          <p class="reading">~7,000 words · US-China AI race thesis</p>
+        </a>
+        <a href="topic5.html" class="topic-card">
+          <span class="topic-number">05</span>
+          <h3>European Digital Sovereignty</h3>
+          <p class="author">Bria, "Reclaiming Europe's Digital Sovereignty"</p>
+          <p class="reading">~6,000 words · EuroStack and EU autonomy</p>
+        </a>
+        <a href="topic6.html" class="topic-card">
+          <span class="topic-number">06</span>
+          <h3>Open Source AI and Power</h3>
+          <p class="author">Widder et al., "Open (For Business)"</p>
+          <p class="reading">~8,000 words · Critique of "open" AI</p>
+        </a>
+        <a href="topic7.html" class="topic-card">
+          <span class="topic-number">07</span>
+          <h3>AI and Democracy</h3>
+          <p class="author">Csernatoni, "Can Democracy Survive AI?"</p>
+          <p class="reading">~4,500 words · Elections and disinformation</p>
+        </a>
+        <a href="topic8.html" class="topic-card">
+          <span class="topic-number">08</span>
+          <h3>Labor and AI</h3>
+          <p class="author">ITUC, "AI: Implications for Trade Unions"</p>
+          <p class="reading">~6,500 words · Global labor perspective</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="deliverables">
+      <div class="section-header">
+        <h2>Your Deliverables</h2>
+        <span class="accent">What you'll create</span>
+      </div>
+      <div class="deliverables">
+        <div class="deliverable">
+          <h3>Policy Brief</h3>
+          <p>2,000–3,000 words written for Denmark's Minister for Digitization. Clear recommendations, evidence-based arguments, Danish/European context.</p>
+        </div>
+        <div class="deliverable">
+          <h3>Presentation</h3>
+          <p>15–20 minutes presenting to the class. Explain your analysis, defend your recommendations, engage with questions.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="updates">
+      <h3>Recent Developments (Early 2026)</h3>
+      <ul>
+        <li><strong>DeepSeek restrictions:</strong> Australia and Czech Republic banned DeepSeek from government devices (Jan/Feb 2026) over security concerns. US Congress raised concerns about PLA integration.</li>
+        <li><strong>EU AI Act timeline:</strong> Full application August 2, 2026. Member states must establish AI regulatory sandboxes by then.</li>
+        <li><strong>Danish AI Law:</strong> Bill introduced February 2025, among first EU member implementations.</li>
+        <li><strong>DeepSeek technical paper:</strong> January 2026 paper proposes new training architecture that could reshape the industry.</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p>AI Governance and Ethics · MSc Business Data Science · February 2026</p>
+      <p>Copenhagen Business School</p>
+    </div>
+  </footer>
+
+</body>
+</html>

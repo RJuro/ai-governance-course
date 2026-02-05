@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Topic 4: Geopolitical Competition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&family=Caveat:wght@500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #2A2320;
+      --bg-warm: #342D29;
+      --bg-card: #3D3632;
+      --coral: #E8734A;
+      --coral-light: #F5A17A;
+      --cream: #F5F0EB;
+      --text-light: #E8E4E0;
+      --text-muted: #9A938D;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      opacity: 0.03;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--coral);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+    .back-link:hover { gap: 0.75rem; }
+    .topic-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .topic-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.2;
+    }
+    .topic-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      font-weight: 600;
+      color: var(--coral);
+      opacity: 0.25;
+      line-height: 1;
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin: 2.5rem 0 1rem;
+    }
+    h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin: 1.5rem 0 0.75rem;
+    }
+    p { color: var(--text-muted); margin-bottom: 0.75rem; }
+    strong { color: var(--text-light); }
+    a { color: var(--coral-light); }
+    a:hover { text-decoration: none; }
+    ul, ol { color: var(--text-muted); margin: 1rem 0; padding-left: 1.25rem; }
+    li { margin-bottom: 0.5rem; }
+    .reading-box {
+      background: var(--bg-warm);
+      border-left: 4px solid var(--coral);
+      border-radius: 4px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .reading-box h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      color: var(--cream);
+      margin-bottom: 0.75rem;
+    }
+    .reading-box p { margin: 0.25rem 0; font-size: 0.95rem; }
+    .questions ol { counter-reset: q; list-style: none; padding: 0; }
+    .questions li {
+      counter-increment: q;
+      padding: 0.75rem 0 0.75rem 2.5rem;
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .questions li::before {
+      content: counter(q);
+      position: absolute;
+      left: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--coral);
+      opacity: 0.6;
+    }
+    .angles ol { counter-reset: a; list-style: none; padding: 0; }
+    .angles li {
+      counter-increment: a;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .note-box {
+      background: var(--bg-warm);
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 2rem;
+    }
+    footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    @media (max-width: 600px) {
+      .topic-header { flex-direction: column-reverse; gap: 1rem; }
+      .topic-num { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to overview</a>
+
+    <header class="topic-header">
+      <h1>Geopolitical Competition</h1>
+      <span class="topic-num">04</span>
+    </header>
+
+    <p>This topic examines AI development as a geopolitical race with national security implications. Aschenbrenner argues that superintelligence will confer decisive military advantage comparable to nuclear weapons, that China has a credible path to competitiveness, and that democracies must "win" this race to preserve freedom. This is among the most hawkish mainstream perspectives on AI governance.</p>
+
+    <p><strong>Why this matters for Danish AI policy:</strong> As a small NATO member, Denmark must navigate US-China AI competition. Should Denmark align fully with US approaches, pursue European strategic autonomy, or seek a balanced position? What are the security implications of AI dependence?</p>
+
+    <h2>Required Reading</h2>
+    <div class="reading-box">
+      <h4>The Free World Must Prevail</h4>
+      <p><strong>Author:</strong> Leopold Aschenbrenner</p>
+      <p><strong>Publication:</strong> <em>Situational Awareness</em> Chapter IIId, June 2024</p>
+      <p><strong>Length:</strong> ~6,500–7,500 words</p>
+      <p><strong>URL:</strong> <a href="https://situational-awareness.ai/the-free-world-must-prevail/">situational-awareness.ai/the-free-world-must-prevail</a></p>
+      <p><strong>Full PDF:</strong> <a href="https://situational-awareness.ai/wp-content/uploads/2024/06/situationalawareness.pdf">situational-awareness.ai PDF</a></p>
+    </div>
+
+    <h3>Key Sections</h3>
+    <ul>
+      <li>"Whoever leads on superintelligence will have a decisive military advantage" (with Gulf War illustration)</li>
+      <li>"China can be competitive" (compute and algorithms subsections)</li>
+      <li>"The authoritarian peril"</li>
+      <li>"Maintaining a healthy lead will be decisive for safety"</li>
+      <li>"Superintelligence is a matter of national security"</li>
+    </ul>
+
+    <h3>Author Credentials</h3>
+    <p>Leopold Aschenbrenner was a member of OpenAI's Superalignment team, working with Ilya Sutskever. He graduated as valedictorian of Columbia University at age 19. He was fired from OpenAI in April 2024 after raising security concerns. He subsequently founded Situational Awareness LP, an AI-focused investment fund managing over $1.5 billion.</p>
+    <p><strong>Note:</strong> His departure from OpenAI was controversial. Some view his analysis as prescient; others see it as alarmist and self-serving.</p>
+
+    <h2>Supplementary Materials</h2>
+
+    <h3>Podcasts &amp; Videos</h3>
+    <ul>
+      <li><a href="https://www.dwarkesh.com/p/leopold-aschenbrenner">Dwarkesh Patel podcast</a> (June 2024, 4.5 hours). Comprehensive interview covering the full <em>Situational Awareness</em> document. Also on <a href="https://open.spotify.com/episode/5NQFPblNw8ewxKolIDpiYN">Spotify</a> and <a href="https://podcasts.apple.com/us/podcast/leopold-aschenbrenner-2027-agi-china-us-super-intelligence/id1516093381?i=1000657821539">Apple Podcasts</a>.</li>
+      <li>Stanford Digital Economy Lab fireside chat with Erik Brynjolfsson (September 2024). More measured discussion of the arguments.</li>
+    </ul>
+
+    <h3>Additional Context</h3>
+    <ul>
+      <li>US-China AI competition. CSIS and Brookings analyses.</li>
+      <li>EU strategic autonomy debates. How Europe positions itself.</li>
+      <li>NATO AI strategy. Alliance approaches to AI and security.</li>
+    </ul>
+
+    <h3>January 2026 Update: DeepSeek</h3>
+    <ul>
+      <li><strong>The DeepSeek shock:</strong> China's DeepSeek released competitive "open" models that challenged assumptions about US lead. Multiple governments (Australia, Czech Republic) banned it from government devices.</li>
+      <li><a href="https://chinaselectcommittee.house.gov/sites/evo-subsites/selectcommitteeontheccp.house.gov/files/evo-media-document/letter-to-doc-nvidia-deepseek-pla-use_final.pdf">US Congressional letter</a> raised concerns about DeepSeek integration into PLA systems.</li>
+      <li><a href="https://www.lawfaremedia.org/article/what-deepseek-r1-means-and-what-it-doesn-t">Lawfare analysis</a>: "China's AI breakthrough doesn't invalidate America's export controls—but it does expose real weaknesses."</li>
+    </ul>
+
+    <h3>Contrasting Perspectives</h3>
+    <ul>
+      <li><strong>Topic 3 (Narayanan &amp; Kapoor).</strong> Argues AI is "normal," not an existential race.</li>
+      <li><strong>Topic 5 (Bria).</strong> European sovereignty perspective, skeptical of US framing.</li>
+    </ul>
+
+    <h2>Guiding Questions</h2>
+    <div class="questions">
+      <ol>
+        <li><strong>The race framing:</strong> Aschenbrenner frames AI development as a race democracies must win. Is this framing accurate? What are the risks of <em>accepting</em> this framing? What are the risks of <em>rejecting</em> it?</li>
+        <li><strong>Military advantage:</strong> The essay argues superintelligence confers decisive military advantage. How credible is this claim? How should Denmark, as a NATO member, weigh AI military considerations?</li>
+        <li><strong>China assessment:</strong> Aschenbrenner argues China can be competitive through compute buildout and algorithm theft. How should Danish policymakers assess Chinese AI capabilities? What are Denmark's specific vulnerabilities?</li>
+        <li><strong>Small state strategy:</strong> Denmark cannot independently compete in an AI "race." What strategies are available to small democracies? Alignment with the US? European coordination? Neutrality? Niche specialization?</li>
+        <li><strong>Critique:</strong> Aschenbrenner was fired from OpenAI and now runs an AI investment fund. How should policymakers weigh his arguments given potential conflicts of interest? Does his insider knowledge add or detract from credibility?</li>
+      </ol>
+    </div>
+
+    <h2>Presentation Angle Ideas</h2>
+    <div class="angles">
+      <ol>
+        <li><strong>"Denmark's AI Security Strategy":</strong> Accept the geopolitical competition framing and propose how Denmark should position itself: deepening NATO AI cooperation, hosting allied AI infrastructure, or developing specific defensive capabilities.</li>
+        <li><strong>"Critique of the Race Framing":</strong> Challenge the premise that AI development is a zero-sum race. Argue for international cooperation, arms control analogies, or alternative framings that better serve Danish interests.</li>
+        <li><strong>"Balancing Alliance and Autonomy":</strong> Explore tension between US alignment and European strategic autonomy. How can Denmark maintain transatlantic alliance while supporting EU digital sovereignty (Topic 5)?</li>
+        <li><strong>"The Small State Playbook":</strong> Focus specifically on what strategies small democracies have in great power AI competition. Draw on Denmark's historical experience navigating Cold War dynamics, EU integration, and Nordic cooperation.</li>
+      </ol>
+    </div>
+
+    <p class="note-box"><strong>Note:</strong> This reading presents the <em>opposite</em> worldview from Topic 3 (Narayanan &amp; Kapoor). Together they represent the key debate: Is AI development an urgent national security race, or a gradual technological transition that existing institutions can manage?</p>
+
+    <footer>
+      <a href="index.html" class="back-link">← Back to overview</a>
+    </footer>
+  </div>
+</body>
+</html>
