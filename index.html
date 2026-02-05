@@ -703,6 +703,222 @@
       font-size: 0.85rem;
     }
 
+    /* Topic Panel Overlay */
+    .topic-panel-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .topic-panel-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .topic-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(720px, 90vw);
+      height: 100%;
+      background: var(--bg-dark);
+      z-index: 1000;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .topic-panel.active {
+      transform: translateX(0);
+    }
+
+    .topic-panel::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(720px, 90vw);
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .topic-panel-close {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 1.25rem 2rem;
+      background: linear-gradient(var(--bg-dark), rgba(44, 36, 33, 0.95));
+      border: none;
+      color: var(--coral);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: gap 0.2s ease;
+    }
+
+    .topic-panel-close:hover {
+      gap: 0.85rem;
+    }
+
+    .topic-panel-body {
+      position: relative;
+      z-index: 1;
+      padding: 0 2rem 3rem;
+      max-width: 900px;
+    }
+
+    /* Re-style topic content inside panel */
+    .topic-panel-body .topic-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .topic-panel-body .topic-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.2;
+    }
+
+    .topic-panel-body .topic-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 600;
+      color: var(--coral);
+      opacity: 0.25;
+      line-height: 1;
+    }
+
+    .topic-panel-body h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin: 2.5rem 0 1rem;
+    }
+
+    .topic-panel-body h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    .topic-panel-body p {
+      color: var(--text-light-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .topic-panel-body strong {
+      color: var(--text-light);
+    }
+
+    .topic-panel-body a {
+      color: var(--coral-light);
+    }
+
+    .topic-panel-body a:hover {
+      text-decoration: none;
+    }
+
+    .topic-panel-body ul,
+    .topic-panel-body ol {
+      color: var(--text-light-muted);
+      margin: 1rem 0;
+      padding-left: 1.25rem;
+    }
+
+    .topic-panel-body li {
+      margin-bottom: 0.5rem;
+    }
+
+    .topic-panel-body .reading-box {
+      background: var(--bg-warm);
+      border-left: 4px solid var(--coral);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .topic-panel-body .reading-box h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--cream);
+      margin-bottom: 0.75rem;
+    }
+
+    .topic-panel-body .reading-box p {
+      margin: 0.25rem 0;
+      font-size: 0.95rem;
+    }
+
+    .topic-panel-body .questions ol {
+      counter-reset: q;
+      list-style: none;
+      padding: 0;
+    }
+
+    .topic-panel-body .questions li {
+      counter-increment: q;
+      padding: 0.75rem 0 0.75rem 2.5rem;
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .topic-panel-body .questions li::before {
+      content: counter(q);
+      position: absolute;
+      left: 0;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--coral);
+      opacity: 0.6;
+    }
+
+    .topic-panel-body .angles ol {
+      counter-reset: a;
+      list-style: none;
+      padding: 0;
+    }
+
+    .topic-panel-body .angles li {
+      counter-increment: a;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .topic-panel-body .note-box {
+      background: var(--bg-warm);
+      padding: 1rem 1.5rem;
+      margin-top: 2rem;
+    }
+
+    body.panel-open {
+      overflow: hidden;
+    }
+
     /* Responsive */
     @media (max-width: 1200px) {
       .topics-grid {
@@ -1012,6 +1228,81 @@
       <p>Aalborg University Business School</p>
     </div>
   </footer>
+
+  <!-- Topic Panel -->
+  <div class="topic-panel-overlay" id="topicOverlay"></div>
+  <div class="topic-panel" id="topicPanel">
+    <button class="topic-panel-close" id="topicClose">← Back to overview</button>
+    <div class="topic-panel-body" id="topicBody"></div>
+  </div>
+
+  <script>
+    (function() {
+      const panel = document.getElementById('topicPanel');
+      const overlay = document.getElementById('topicOverlay');
+      const body = document.getElementById('topicBody');
+      const closeBtn = document.getElementById('topicClose');
+
+      function openPanel(href) {
+        fetch(href)
+          .then(r => r.text())
+          .then(html => {
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            const content = doc.querySelector('.container');
+            // Remove the back-link and footer from fetched content
+            content.querySelectorAll('.back-link, footer').forEach(el => el.remove());
+            body.innerHTML = content.innerHTML;
+            panel.classList.add('active');
+            overlay.classList.add('active');
+            document.body.classList.add('panel-open');
+            panel.scrollTop = 0;
+          });
+      }
+
+      function closePanel() {
+        panel.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.classList.remove('panel-open');
+        history.pushState(null, '', window.location.pathname);
+      }
+
+      // Intercept topic card clicks
+      document.querySelectorAll('.topic-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+          e.preventDefault();
+          const href = this.getAttribute('href');
+          history.pushState({ topic: href }, '', '#' + href.replace('.html', ''));
+          openPanel(href);
+        });
+      });
+
+      closeBtn.addEventListener('click', closePanel);
+      overlay.addEventListener('click', closePanel);
+
+      // Close on Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && panel.classList.contains('active')) {
+          closePanel();
+        }
+      });
+
+      // Handle browser back button
+      window.addEventListener('popstate', function() {
+        if (panel.classList.contains('active')) {
+          panel.classList.remove('active');
+          overlay.classList.remove('active');
+          document.body.classList.remove('panel-open');
+        } else if (location.hash && location.hash.startsWith('#topic')) {
+          openPanel(location.hash.slice(1) + '.html');
+        }
+      });
+
+      // Open panel if URL has topic hash on load
+      if (location.hash && location.hash.startsWith('#topic')) {
+        openPanel(location.hash.slice(1) + '.html');
+      }
+    })();
+  </script>
 
 </body>
 </html>
