@@ -3,22 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Governance and Ethics</title>
+  <title>AI Governance and Ethics | Aalborg University</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&family=Caveat:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;500;600&family=Caveat:wght@500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #2A2320;
-      --bg-warm: #342D29;
-      --bg-card: #3D3632;
-      --coral: #E8734A;
-      --coral-light: #F5A17A;
-      --cream: #F5F0EB;
-      --cream-muted: #D4CEC8;
-      --text-light: #E8E4E0;
-      --text-muted: #9A938D;
-      --gold: #C9A96E;
+      --bg-dark: #2C2421;
+      --bg-warm: #362E2A;
+      --bg-card: #3D3531;
+      --cream: #FAF7F2;
+      --cream-dark: #EDE8E0;
+      --coral: #E07850;
+      --coral-light: #F0A080;
+      --gold: #D4A855;
+      --text-dark: #2C2421;
+      --text-muted: #6B5D55;
+      --text-light: #F0EBE5;
+      --text-light-muted: #A89B91;
     }
 
     * {
@@ -32,14 +34,15 @@
     }
 
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Source Sans 3', sans-serif;
       background: var(--bg-dark);
       color: var(--text-light);
       line-height: 1.7;
       font-size: 16px;
+      overflow-x: hidden;
     }
 
-    /* Subtle grain texture */
+    /* Dot grid pattern overlay */
     body::before {
       content: '';
       position: fixed;
@@ -47,21 +50,25 @@
       left: 0;
       width: 100%;
       height: 100%;
-      opacity: 0.03;
       pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      z-index: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 0 3rem;
+      position: relative;
+      z-index: 1;
     }
 
     /* Header */
     header {
-      padding: 2rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 1.5rem 0;
+      position: relative;
+      z-index: 10;
     }
 
     .header-inner {
@@ -71,22 +78,30 @@
     }
 
     .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      font-weight: 600;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
       color: var(--cream);
       letter-spacing: 0.02em;
     }
 
     .logo span {
       color: var(--coral);
+      font-style: italic;
+    }
+
+    nav {
+      display: flex;
+      gap: 2.5rem;
     }
 
     nav a {
-      color: var(--text-muted);
+      color: var(--text-light-muted);
       text-decoration: none;
-      font-size: 0.9rem;
-      margin-left: 2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
       transition: color 0.2s;
     }
 
@@ -94,23 +109,42 @@
       color: var(--cream);
     }
 
-    /* Hero */
+    /* Hero Section - Editorial Layout */
     .hero {
-      padding: 6rem 0 5rem;
+      padding: 4rem 0 6rem;
       position: relative;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
     }
 
     .hero-content {
-      max-width: 700px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-label {
+      font-family: 'Caveat', cursive;
+      font-size: 1.5rem;
+      color: var(--coral);
+      margin-bottom: 1rem;
+      display: block;
     }
 
     .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 7vw, 5.5rem);
       font-weight: 400;
-      line-height: 1.1;
+      line-height: 1.05;
       color: var(--cream);
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
     }
 
     .hero h1 em {
@@ -118,259 +152,398 @@
       color: var(--coral);
     }
 
-    .hero-subtitle {
-      font-family: 'Caveat', cursive;
-      font-size: 1.75rem;
-      color: var(--coral-light);
-      margin-bottom: 1rem;
-      opacity: 0.9;
-    }
-
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      max-width: 500px;
-      margin-bottom: 2rem;
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-light-muted);
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
     }
 
     .cta-row {
       display: flex;
-      gap: 1rem;
+      gap: 1.25rem;
       align-items: center;
-      flex-wrap: wrap;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.9rem 1.75rem;
+      gap: 0.6rem;
+      padding: 1rem 2rem;
       background: var(--coral);
-      color: var(--bg-dark);
+      color: var(--cream);
       text-decoration: none;
       font-weight: 600;
       font-size: 0.9rem;
-      border-radius: 2px;
-      transition: all 0.2s;
+      letter-spacing: 0.02em;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::after {
+      content: '→';
+      transition: transform 0.25s ease;
     }
 
     .btn:hover {
       background: var(--coral-light);
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(224, 120, 80, 0.3);
+    }
+
+    .btn:hover::after {
+      transform: translateX(4px);
     }
 
     .btn-ghost {
       background: transparent;
-      border: 1px solid var(--text-muted);
+      border: 1px solid var(--text-light-muted);
       color: var(--text-light);
+    }
+
+    .btn-ghost::after {
+      display: none;
     }
 
     .btn-ghost:hover {
       border-color: var(--cream);
-      background: transparent;
+      background: rgba(255,255,255,0.05);
+      box-shadow: none;
     }
 
-    /* Info bar */
-    .info-bar {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1px;
-      background: rgba(255,255,255,0.08);
-      margin: 4rem 0;
-      border-radius: 3px;
-      overflow: hidden;
+    /* Hero Cards - Floating cream cards */
+    .hero-cards {
+      position: relative;
+      height: 500px;
     }
 
-    .info-item {
-      background: var(--bg-warm);
-      padding: 1.5rem 1.75rem;
+    .floating-card {
+      position: absolute;
+      background: var(--cream);
+      color: var(--text-dark);
+      padding: 1.75rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      transition: transform 0.4s ease;
     }
 
-    .info-item span {
-      display: block;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
+    .floating-card:hover {
+      transform: translateY(-8px) rotate(0deg) !important;
     }
 
-    .info-item strong {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
+    .card-1 {
+      width: 280px;
+      top: 0;
+      right: 20px;
+      transform: rotate(2deg);
+      z-index: 3;
+    }
+
+    .card-2 {
+      width: 240px;
+      top: 180px;
+      right: 180px;
+      transform: rotate(-3deg);
+      z-index: 2;
+    }
+
+    .card-3 {
+      width: 200px;
+      bottom: 20px;
+      right: 60px;
+      transform: rotate(1deg);
+      z-index: 1;
+      background: var(--cream-dark);
+    }
+
+    .floating-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
       font-weight: 600;
-      color: var(--cream);
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
     }
 
-    /* Section headers */
+    .floating-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .floating-card .stat {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--coral);
+      line-height: 1;
+    }
+
+    .floating-card .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* Cream Section */
+    .cream-section {
+      background: var(--cream);
+      color: var(--text-dark);
+      padding: 5rem 0;
+      position: relative;
+      margin: 0 -100vw;
+      padding-left: 100vw;
+      padding-right: 100vw;
+    }
+
+    .cream-section .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
     .section-header {
       display: flex;
       align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      gap: 1.25rem;
+      margin-bottom: 3rem;
     }
 
     .section-header h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
       font-weight: 400;
-      color: var(--cream);
+      color: inherit;
     }
 
     .section-header .accent {
       font-family: 'Caveat', cursive;
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       color: var(--coral);
     }
 
     /* Project Overview */
-    .project-overview {
-      margin: 3rem 0 4rem;
-    }
-
-    .overview-content {
-      background: var(--bg-warm);
-      border-radius: 6px;
-      padding: 2.5rem;
-      max-width: 800px;
-    }
-
-    .overview-content p {
-      color: var(--text-muted);
-      margin-bottom: 1.25rem;
-      font-size: 1.05rem;
-    }
-
-    .overview-content ol {
-      margin: 1.5rem 0 1.5rem 1.25rem;
-      color: var(--text-muted);
-    }
-
-    .overview-content li {
-      margin-bottom: 1rem;
-      padding-left: 0.5rem;
-    }
-
-    .overview-content li strong {
-      color: var(--cream);
-    }
-
-    .overview-content .highlight {
-      background: rgba(232, 115, 74, 0.1);
-      border-left: 3px solid var(--coral);
-      padding: 1rem 1.25rem;
-      margin-top: 1.5rem;
-      margin-bottom: 0;
-      border-radius: 0 4px 4px 0;
-      color: var(--text-light);
-    }
-
-    /* Timeline */
-    .timeline {
-      margin: 3rem 0 4rem;
-    }
-
-    .timeline-grid {
+    .overview-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 0;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .overview-text p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .overview-steps {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+    }
+
+    .overview-steps li {
+      counter-increment: step;
+      position: relative;
+      padding: 1.5rem 0 1.5rem 4rem;
+      border-bottom: 1px solid rgba(44, 36, 33, 0.1);
+    }
+
+    .overview-steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--coral);
+      opacity: 0.6;
+    }
+
+    .overview-steps li strong {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    .highlight-box {
+      background: var(--bg-dark);
+      color: var(--cream);
+      padding: 2rem 2.5rem;
+      margin-top: 2rem;
       position: relative;
     }
 
-    .timeline-grid::before {
+    .highlight-box::before {
       content: '';
       position: absolute;
-      top: 1.5rem;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--coral);
+    }
+
+    .highlight-box p {
+      color: var(--text-light-muted);
+      margin: 0;
+    }
+
+    /* Info Cards */
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .info-card {
+      background: var(--bg-dark);
+      color: var(--cream);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 60px;
+      height: 60px;
+      background: var(--coral);
+      opacity: 0.15;
+      border-radius: 0 0 0 60px;
+    }
+
+    .info-card span {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-light-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .info-card strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--cream);
+    }
+
+    /* Timeline */
+    .timeline-section {
+      padding: 5rem 0;
+    }
+
+    .timeline-track {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin-top: 3rem;
+    }
+
+    .timeline-track::before {
+      content: '';
+      position: absolute;
+      top: 20px;
       left: 0;
       right: 0;
       height: 2px;
       background: linear-gradient(90deg, var(--coral), var(--gold));
     }
 
-    .timeline-item {
+    .timeline-point {
       text-align: center;
-      padding: 0 0.5rem;
+      position: relative;
+      flex: 1;
     }
 
     .timeline-dot {
-      width: 12px;
-      height: 12px;
+      width: 14px;
+      height: 14px;
       background: var(--coral);
       border-radius: 50%;
-      margin: 0 auto 1rem;
+      margin: 0 auto 1.25rem;
       position: relative;
       z-index: 1;
-      box-shadow: 0 0 0 4px var(--bg-dark);
+      box-shadow: 0 0 0 6px var(--bg-dark);
     }
 
-    .timeline-item:last-child .timeline-dot {
+    .timeline-point:last-child .timeline-dot {
       background: var(--gold);
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
+      margin-bottom: calc(1.25rem - 3px);
     }
 
     .timeline-date {
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--cream);
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.35rem;
     }
 
     .timeline-label {
       font-size: 0.8rem;
-      color: var(--text-muted);
+      color: var(--text-light-muted);
       line-height: 1.4;
     }
 
-    /* Topics grid */
+    /* Topics Grid */
+    .topics-section {
+      padding: 5rem 0;
+    }
+
     .topics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 1.25rem;
-      margin: 2rem 0 4rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
     }
 
     .topic-card {
-      background: var(--bg-card);
-      border-radius: 4px;
-      padding: 1.75rem;
+      background: var(--cream);
+      color: var(--text-dark);
+      padding: 2rem 1.75rem;
+      text-decoration: none;
       position: relative;
       overflow: hidden;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      text-decoration: none;
-      display: block;
+      transition: all 0.35s ease;
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
     }
 
     .topic-card::before {
       content: '';
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 0;
-      width: 4px;
-      height: 100%;
+      right: 0;
+      height: 4px;
       background: var(--coral);
-      transform: scaleY(0);
-      transition: transform 0.3s ease;
+      transform: scaleX(0);
+      transition: transform 0.35s ease;
     }
 
     .topic-card:hover {
-      background: var(--bg-warm);
-      transform: translateY(-2px);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
     }
 
     .topic-card:hover::before {
-      transform: scaleY(1);
+      transform: scaleX(1);
     }
 
     .topic-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
       font-weight: 600;
       color: var(--coral);
-      opacity: 0.3;
+      opacity: 0.2;
       position: absolute;
       top: 0.5rem;
       right: 1rem;
@@ -378,295 +551,219 @@
     }
 
     .topic-card h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
       font-weight: 600;
-      color: var(--cream);
-      margin-bottom: 0.5rem;
-      padding-right: 2rem;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+      padding-right: 2.5rem;
+      line-height: 1.3;
     }
 
     .topic-card .author {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
-      margin-bottom: 0.75rem;
+      margin-bottom: auto;
     }
 
     .topic-card .reading {
-      font-size: 0.8rem;
-      color: var(--coral-light);
+      font-size: 0.75rem;
+      color: var(--coral);
+      margin-top: 1rem;
+      font-weight: 500;
     }
 
     /* Deliverables */
-    .deliverables {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin: 2rem 0 4rem;
-    }
-
-    .deliverable {
-      position: relative;
-      padding-left: 1.5rem;
-      border-left: 2px solid var(--coral);
-    }
-
-    .deliverable h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--cream);
-      margin-bottom: 0.75rem;
-    }
-
-    .deliverable p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
-    /* Updates section */
-    .updates {
+    .deliverables-section {
       background: var(--bg-warm);
-      border-radius: 4px;
-      padding: 2rem;
-      margin: 3rem 0;
+      padding: 5rem 0;
+      margin: 0 -100vw;
+      padding-left: calc(100vw + 3rem);
+      padding-right: calc(100vw + 3rem);
     }
 
-    .updates h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
+    .deliverables-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .deliverable-card {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .deliverable-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--coral);
+    }
+
+    .deliverable-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      font-weight: 400;
       color: var(--cream);
       margin-bottom: 1rem;
+    }
+
+    .deliverable-card p {
+      color: var(--text-light-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    /* Updates */
+    .updates-section {
+      padding: 4rem 0;
+    }
+
+    .updates-box {
+      background: var(--cream);
+      color: var(--text-dark);
+      padding: 2.5rem 3rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .updates-label {
       display: flex;
       align-items: center;
       gap: 0.75rem;
     }
 
-    .updates h3::before {
-      content: '';
-      width: 8px;
-      height: 8px;
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
       background: var(--coral);
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.9); }
     }
 
-    .updates ul {
-      list-style: none;
+    .updates-label h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      white-space: nowrap;
+    }
+
+    .updates-list {
       display: grid;
-      gap: 0.75rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 2rem;
+      list-style: none;
     }
 
-    .updates li {
-      color: var(--text-muted);
+    .updates-list li {
       font-size: 0.9rem;
-      padding-left: 1rem;
+      color: var(--text-muted);
+      padding-left: 1.25rem;
       position: relative;
     }
 
-    .updates li::before {
+    .updates-list li::before {
       content: '→';
       position: absolute;
       left: 0;
       color: var(--coral);
     }
 
-    .updates li strong {
-      color: var(--text-light);
+    .updates-list strong {
+      color: var(--text-dark);
     }
 
     /* Footer */
     footer {
       padding: 3rem 0;
       border-top: 1px solid rgba(255,255,255,0.08);
-      margin-top: 4rem;
     }
 
     .footer-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
     }
 
     footer p {
-      color: var(--text-muted);
+      color: var(--text-light-muted);
       font-size: 0.85rem;
     }
 
-    /* Topic pages */
-    .topic-page {
-      padding: 4rem 0;
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--coral);
-      text-decoration: none;
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
-      transition: gap 0.2s;
-    }
-
-    .back-link:hover {
-      gap: 0.75rem;
-    }
-
-    .topic-hero {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 3rem;
-      align-items: start;
-      margin-bottom: 3rem;
-    }
-
-    .topic-hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
-      font-weight: 400;
-      color: var(--cream);
-      line-height: 1.15;
-    }
-
-    .topic-meta {
-      text-align: right;
-    }
-
-    .topic-meta .number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 6rem;
-      font-weight: 600;
-      color: var(--coral);
-      opacity: 0.2;
-      line-height: 1;
-    }
-
-    .reading-box {
-      background: var(--bg-warm);
-      border-radius: 4px;
-      padding: 2rem;
-      margin: 2rem 0;
-      border-left: 4px solid var(--coral);
-    }
-
-    .reading-box h4 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      color: var(--cream);
-      margin-bottom: 1rem;
-    }
-
-    .reading-box p {
-      margin: 0.35rem 0;
-      color: var(--text-muted);
-    }
-
-    .reading-box a {
-      color: var(--coral-light);
-      text-decoration: none;
-      word-break: break-word;
-    }
-
-    .reading-box a:hover {
-      text-decoration: underline;
-    }
-
-    h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.75rem;
-      font-weight: 400;
-      color: var(--cream);
-      margin: 3rem 0 1.25rem;
-    }
-
-    h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--cream);
-      margin: 2rem 0 0.75rem;
-    }
-
-    p {
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-
-    ul, ol {
-      color: var(--text-muted);
-      margin: 1rem 0;
-      padding-left: 1.25rem;
-    }
-
-    li {
-      margin-bottom: 0.5rem;
-    }
-
-    li strong {
-      color: var(--text-light);
-    }
-
-    a {
-      color: var(--coral-light);
-    }
-
-    .questions ol {
-      counter-reset: q;
-      list-style: none;
-      padding: 0;
-    }
-
-    .questions li {
-      counter-increment: q;
-      padding: 1rem 0 1rem 3rem;
-      position: relative;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .questions li::before {
-      content: counter(q);
-      position: absolute;
-      left: 0;
-      top: 1rem;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--coral);
-      opacity: 0.6;
-    }
-
-    .note-box {
-      background: rgba(232, 115, 74, 0.1);
-      border: 1px solid rgba(232, 115, 74, 0.3);
-      border-radius: 4px;
-      padding: 1.25rem 1.5rem;
-      margin: 2rem 0;
-      font-size: 0.95rem;
-    }
-
     /* Responsive */
-    @media (max-width: 768px) {
-      .timeline-grid {
+    @media (max-width: 1200px) {
+      .topics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
       }
 
-      .timeline-grid::before {
+      .hero-cards {
         display: none;
       }
 
-      .timeline-item {
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .deliverables-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .updates-box {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .updates-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1.5rem;
+      }
+
+      .topics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-track {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .timeline-track::before {
+        display: none;
+      }
+
+      .timeline-point {
         text-align: left;
         display: flex;
-        gap: 1rem;
         align-items: center;
+        gap: 1.25rem;
       }
 
       .timeline-dot {
@@ -674,20 +771,15 @@
         flex-shrink: 0;
       }
 
-      .topics-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .topic-hero {
-        grid-template-columns: 1fr;
-      }
-
-      .topic-meta {
-        display: none;
-      }
-
       nav {
         display: none;
+      }
+
+      .cream-section,
+      .deliverables-section {
+        margin: 0;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
       }
     }
   </style>
@@ -698,6 +790,7 @@
     <div class="container header-inner">
       <div class="logo">AI <span>Governance</span></div>
       <nav>
+        <a href="#overview">Overview</a>
         <a href="#timeline">Timeline</a>
         <a href="#topics">Topics</a>
         <a href="#deliverables">Deliverables</a>
@@ -705,174 +798,212 @@
     </div>
   </header>
 
-  <main class="container">
+  <main>
     <section class="hero">
-      <div class="hero-content">
-        <p class="hero-subtitle">Aalborg University Business School</p>
-        <h1>AI Governance<br>and <em>Ethics</em></h1>
-        <p>Become an expert on one governance topic. Write a policy brief for Denmark's Minister for Digitization. Present your findings.</p>
-        <div class="cta-row">
-          <a href="#topics" class="btn">View Topics ↓</a>
-          <a href="#deliverables" class="btn btn-ghost">Deliverables</a>
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <span class="hero-label">Aalborg University Business School</span>
+            <h1>AI Governance<br>and <em>Ethics</em></h1>
+            <p class="hero-desc">Become an expert on AI policy. Write a brief for Denmark's Minister for Digitization. Shape the conversation.</p>
+            <div class="cta-row">
+              <a href="#topics" class="btn">Explore Topics</a>
+              <a href="#overview" class="btn btn-ghost">How It Works</a>
+            </div>
+          </div>
+          <div class="hero-cards">
+            <div class="floating-card card-1">
+              <h4>Policy Brief Project</h4>
+              <p>MSc Business Data Science<br>Spring 2026</p>
+            </div>
+            <div class="floating-card card-2">
+              <div class="stat">8</div>
+              <div class="stat-label">Governance Topics</div>
+            </div>
+            <div class="floating-card card-3">
+              <h4>Feb 26</h4>
+              <p>Final Presentations</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <div class="info-bar">
-      <div class="info-item">
-        <span>Program</span>
-        <strong>MSc Business Data Science</strong>
-      </div>
-      <div class="info-item">
-        <span>Group Size</span>
-        <strong>3–4 Students</strong>
-      </div>
-      <div class="info-item">
-        <span>Brief Length</span>
-        <strong>2,000–3,000 words</strong>
-      </div>
-      <div class="info-item">
-        <span>Presentation</span>
-        <strong>15–20 minutes</strong>
-      </div>
-    </div>
-
-    <section class="project-overview" id="overview">
-      <div class="section-header">
-        <h2>The Project</h2>
-        <span class="accent">What you'll be doing</span>
-      </div>
-      <div class="overview-content">
-        <p>AI governance is one of the most consequential policy challenges of our time. In this project, you will engage directly with the debates shaping how societies respond to artificial intelligence.</p>
-        <p>Working in groups of 3–4, you will:</p>
-        <ol>
-          <li><strong>Claim a topic</strong> from the eight governance themes below. Each addresses a distinct dimension of AI policy relevant to Denmark and the EU.</li>
-          <li><strong>Research deeply.</strong> Start with the required reading, then explore supplementary materials, podcasts, and current developments. Understand the debates, not just the positions.</li>
-          <li><strong>Write a policy brief</strong> (2,000–3,000 words) addressed to Denmark's Minister for Digitization. Make concrete recommendations grounded in evidence. Acknowledge trade-offs and counterarguments.</li>
-          <li><strong>Present your findings</strong> (15–20 minutes) to the class. Defend your analysis. Engage with questions.</li>
-        </ol>
-        <p class="highlight">Your briefs will be published on this site after presentations, creating a resource for future students and anyone interested in Danish AI governance perspectives.</p>
-      </div>
-    </section>
-
-    <section class="timeline" id="timeline">
-      <div class="section-header">
-        <h2>Timeline</h2>
-        <span class="accent">Three weeks to go</span>
-      </div>
-      <div class="timeline-grid">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">Feb 6</div>
-          <div class="timeline-label">Kickoff &<br>Topic Claiming</div>
+    <section class="cream-section" id="overview">
+      <div class="container">
+        <div class="section-header">
+          <h2>The Project</h2>
+          <span class="accent">What you'll be doing</span>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">Feb 6–12</div>
-          <div class="timeline-label">Initial Research<br>(2–3 days)</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">Feb 13–19</div>
-          <div class="timeline-label">Draft<br>Policy Brief</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">Feb 20–25</div>
-          <div class="timeline-label">Finalize<br>Brief & Slides</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">Feb 26</div>
-          <div class="timeline-label">Presentations</div>
+        <div class="overview-grid">
+          <div class="overview-text">
+            <p>AI governance is one of the most consequential policy challenges of our time. In this project, you will engage directly with the debates shaping how societies respond to artificial intelligence.</p>
+            <ol class="overview-steps">
+              <li><strong>Claim a topic</strong> from the eight governance themes. Each addresses a distinct dimension of AI policy relevant to Denmark and the EU.</li>
+              <li><strong>Research deeply.</strong> Start with the required reading, then explore supplementary materials, podcasts, and current developments.</li>
+              <li><strong>Write a policy brief</strong> (2,000–3,000 words) addressed to Denmark's Minister for Digitization. Make concrete recommendations.</li>
+              <li><strong>Present your findings</strong> (15–20 minutes) to the class. Defend your analysis. Engage with questions.</li>
+            </ol>
+            <div class="highlight-box">
+              <p>Your briefs will be published on this site after presentations, creating a resource for future students and anyone interested in Danish AI governance.</p>
+            </div>
+          </div>
+          <div class="info-cards">
+            <div class="info-card">
+              <span>Program</span>
+              <strong>MSc Business Data Science</strong>
+            </div>
+            <div class="info-card">
+              <span>Group Size</span>
+              <strong>3–4 Students</strong>
+            </div>
+            <div class="info-card">
+              <span>Brief Length</span>
+              <strong>2,000–3,000 words</strong>
+            </div>
+            <div class="info-card">
+              <span>Presentation</span>
+              <strong>15–20 minutes</strong>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="topics">
-      <div class="section-header">
-        <h2>The 8 Topics</h2>
-        <span class="accent">Choose your focus</span>
-      </div>
-      <div class="topics-grid">
-        <a href="topic1.html" class="topic-card">
-          <span class="topic-number">01</span>
-          <h3>AI Risk Frameworks</h3>
-          <p class="author">Amodei, "The Adolescence of Technology"</p>
-          <p class="reading">~7,500 words · Anthropic CEO on AI safety</p>
-        </a>
-        <a href="topic2.html" class="topic-card">
-          <span class="topic-number">02</span>
-          <h3>AI and Work Obsolescence</h3>
-          <p class="author">Balwit, "My Last Five Years of Work"</p>
-          <p class="reading">~4,500 words · Personal essay on AI displacement</p>
-        </a>
-        <a href="topic3.html" class="topic-card">
-          <span class="topic-number">03</span>
-          <h3>AI as Normal Technology</h3>
-          <p class="author">Narayanan & Kapoor, "AI as Normal Technology"</p>
-          <p class="reading">~6,500 words · Counter-narrative to AI hype</p>
-        </a>
-        <a href="topic4.html" class="topic-card">
-          <span class="topic-number">04</span>
-          <h3>Geopolitical Competition</h3>
-          <p class="author">Aschenbrenner, "The Free World Must Prevail"</p>
-          <p class="reading">~7,000 words · US-China AI race thesis</p>
-        </a>
-        <a href="topic5.html" class="topic-card">
-          <span class="topic-number">05</span>
-          <h3>European Digital Sovereignty</h3>
-          <p class="author">Bria, "Reclaiming Europe's Digital Sovereignty"</p>
-          <p class="reading">~6,000 words · EuroStack and EU autonomy</p>
-        </a>
-        <a href="topic6.html" class="topic-card">
-          <span class="topic-number">06</span>
-          <h3>Open Source AI and Power</h3>
-          <p class="author">Widder et al., "Open (For Business)"</p>
-          <p class="reading">~8,000 words · Critique of "open" AI</p>
-        </a>
-        <a href="topic7.html" class="topic-card">
-          <span class="topic-number">07</span>
-          <h3>AI and Democracy</h3>
-          <p class="author">Csernatoni, "Can Democracy Survive AI?"</p>
-          <p class="reading">~4,500 words · Elections and disinformation</p>
-        </a>
-        <a href="topic8.html" class="topic-card">
-          <span class="topic-number">08</span>
-          <h3>Labor and AI</h3>
-          <p class="author">ITUC, "AI: Implications for Trade Unions"</p>
-          <p class="reading">~6,500 words · Global labor perspective</p>
-        </a>
+    <section class="timeline-section" id="timeline">
+      <div class="container">
+        <div class="section-header">
+          <h2>Timeline</h2>
+          <span class="accent">Three weeks to go</span>
+        </div>
+        <div class="timeline-track">
+          <div class="timeline-point">
+            <div class="timeline-dot"></div>
+            <div>
+              <div class="timeline-date">Feb 6</div>
+              <div class="timeline-label">Kickoff & Topic Claiming</div>
+            </div>
+          </div>
+          <div class="timeline-point">
+            <div class="timeline-dot"></div>
+            <div>
+              <div class="timeline-date">Feb 6–12</div>
+              <div class="timeline-label">Initial Research</div>
+            </div>
+          </div>
+          <div class="timeline-point">
+            <div class="timeline-dot"></div>
+            <div>
+              <div class="timeline-date">Feb 13–19</div>
+              <div class="timeline-label">Draft Policy Brief</div>
+            </div>
+          </div>
+          <div class="timeline-point">
+            <div class="timeline-dot"></div>
+            <div>
+              <div class="timeline-date">Feb 20–25</div>
+              <div class="timeline-label">Finalize Brief & Slides</div>
+            </div>
+          </div>
+          <div class="timeline-point">
+            <div class="timeline-dot"></div>
+            <div>
+              <div class="timeline-date">Feb 26</div>
+              <div class="timeline-label">Presentations</div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="deliverables">
-      <div class="section-header">
-        <h2>Your Deliverables</h2>
-        <span class="accent">What you'll create</span>
+    <section class="topics-section" id="topics">
+      <div class="container">
+        <div class="section-header">
+          <h2>The 8 Topics</h2>
+          <span class="accent">Choose your focus</span>
+        </div>
+        <div class="topics-grid">
+          <a href="topic1.html" class="topic-card">
+            <span class="topic-number">01</span>
+            <h3>AI Risk Frameworks</h3>
+            <p class="author">Amodei, "The Adolescence of Technology"</p>
+            <p class="reading">~7,500 words · Anthropic CEO</p>
+          </a>
+          <a href="topic2.html" class="topic-card">
+            <span class="topic-number">02</span>
+            <h3>AI and Work Obsolescence</h3>
+            <p class="author">Balwit, "My Last Five Years of Work"</p>
+            <p class="reading">~4,500 words · Personal essay</p>
+          </a>
+          <a href="topic3.html" class="topic-card">
+            <span class="topic-number">03</span>
+            <h3>AI as Normal Technology</h3>
+            <p class="author">Narayanan & Kapoor</p>
+            <p class="reading">~6,500 words · Counter-narrative</p>
+          </a>
+          <a href="topic4.html" class="topic-card">
+            <span class="topic-number">04</span>
+            <h3>Geopolitical Competition</h3>
+            <p class="author">Aschenbrenner, "The Free World Must Prevail"</p>
+            <p class="reading">~7,000 words · US-China race</p>
+          </a>
+          <a href="topic5.html" class="topic-card">
+            <span class="topic-number">05</span>
+            <h3>European Digital Sovereignty</h3>
+            <p class="author">Bria, "Reclaiming Europe's Digital Sovereignty"</p>
+            <p class="reading">~6,000 words · EuroStack</p>
+          </a>
+          <a href="topic6.html" class="topic-card">
+            <span class="topic-number">06</span>
+            <h3>Open Source AI and Power</h3>
+            <p class="author">Widder et al., "Open (For Business)"</p>
+            <p class="reading">~8,000 words · Critique</p>
+          </a>
+          <a href="topic7.html" class="topic-card">
+            <span class="topic-number">07</span>
+            <h3>AI and Democracy</h3>
+            <p class="author">Csernatoni, Carnegie Europe</p>
+            <p class="reading">~4,500 words · Elections</p>
+          </a>
+          <a href="topic8.html" class="topic-card">
+            <span class="topic-number">08</span>
+            <h3>Labor and AI</h3>
+            <p class="author">ITUC, "Implications for Trade Unions"</p>
+            <p class="reading">~6,500 words · Global labor</p>
+          </a>
+        </div>
       </div>
-      <div class="deliverables">
-        <div class="deliverable">
+    </section>
+
+    <section class="deliverables-section" id="deliverables">
+      <div class="deliverables-grid">
+        <div class="deliverable-card">
           <h3>Policy Brief</h3>
-          <p>2,000–3,000 words written for Denmark's Minister for Digitization. Clear recommendations, evidence-based arguments, Danish/European context.</p>
+          <p>2,000–3,000 words written for Denmark's Minister for Digitization. Clear recommendations, evidence-based arguments, Danish and European context. Acknowledge trade-offs.</p>
         </div>
-        <div class="deliverable">
+        <div class="deliverable-card">
           <h3>Presentation</h3>
-          <p>15–20 minutes presenting to the class. Explain your analysis, defend your recommendations, engage with questions.</p>
+          <p>15–20 minutes presenting to the class. Explain your analysis, defend your recommendations, engage with questions from peers and instructor.</p>
         </div>
       </div>
     </section>
 
-    <div class="updates">
-      <h3>Recent Developments (Early 2026)</h3>
-      <ul>
-        <li><strong>DeepSeek restrictions:</strong> Australia and Czech Republic banned DeepSeek from government devices (Jan/Feb 2026) over security concerns. US Congress raised concerns about PLA integration.</li>
-        <li><strong>EU AI Act timeline:</strong> Full application August 2, 2026. Member states must establish AI regulatory sandboxes by then.</li>
-        <li><strong>Danish AI Law:</strong> Bill introduced February 2025, among first EU member implementations.</li>
-        <li><strong>DeepSeek technical paper:</strong> January 2026 paper proposes new training architecture that could reshape the industry.</li>
-      </ul>
-    </div>
-
+    <section class="updates-section">
+      <div class="container">
+        <div class="updates-box">
+          <div class="updates-label">
+            <div class="pulse-dot"></div>
+            <h3>Early 2026</h3>
+          </div>
+          <ul class="updates-list">
+            <li><strong>DeepSeek restrictions:</strong> Australia and Czech Republic banned from government devices over security concerns.</li>
+            <li><strong>EU AI Act:</strong> Full application August 2, 2026. Regulatory sandboxes required.</li>
+            <li><strong>Danish AI Law:</strong> Bill introduced February 2025, among first EU implementations.</li>
+            <li><strong>DeepSeek paper:</strong> January 2026 training architecture may reshape industry.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
