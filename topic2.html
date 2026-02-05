@@ -6,21 +6,22 @@
   <title>Topic 2: AI and Work Obsolescence</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&family=Caveat:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;500;600&family=Caveat:wght@500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #2A2320;
-      --bg-warm: #342D29;
-      --bg-card: #3D3632;
-      --coral: #E8734A;
-      --coral-light: #F5A17A;
-      --cream: #F5F0EB;
-      --text-light: #E8E4E0;
-      --text-muted: #9A938D;
+      --bg-dark: #2C2421;
+      --bg-warm: #362E2A;
+      --bg-card: #3D3531;
+      --cream: #FAF7F2;
+      --cream-dark: #EDE8E0;
+      --coral: #E07850;
+      --coral-light: #F0A080;
+      --text-light: #F0EBE5;
+      --text-light-muted: #A89B91;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Source Sans 3', sans-serif;
       background: var(--bg-dark);
       color: var(--text-light);
       line-height: 1.7;
@@ -31,11 +32,18 @@
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      opacity: 0.03;
       pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      z-index: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
     }
-    .container { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
     .back-link {
       display: inline-flex;
       align-items: center;
@@ -43,7 +51,9 @@
       color: var(--coral);
       text-decoration: none;
       font-size: 0.9rem;
+      font-weight: 500;
       margin-bottom: 2rem;
+      transition: gap 0.2s ease;
     }
     .back-link:hover { gap: 0.75rem; }
     .topic-header {
@@ -55,14 +65,14 @@
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .topic-header h1 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: clamp(2rem, 4vw, 2.75rem);
       font-weight: 400;
       color: var(--cream);
       line-height: 1.2;
     }
     .topic-num {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: 4rem;
       font-weight: 600;
       color: var(--coral);
@@ -70,7 +80,7 @@
       line-height: 1;
     }
     h2 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: 1.5rem;
       font-weight: 400;
       color: var(--cream);
@@ -82,21 +92,20 @@
       color: var(--cream);
       margin: 1.5rem 0 0.75rem;
     }
-    p { color: var(--text-muted); margin-bottom: 0.75rem; }
+    p { color: var(--text-light-muted); margin-bottom: 0.75rem; }
     strong { color: var(--text-light); }
     a { color: var(--coral-light); }
     a:hover { text-decoration: none; }
-    ul, ol { color: var(--text-muted); margin: 1rem 0; padding-left: 1.25rem; }
+    ul, ol { color: var(--text-light-muted); margin: 1rem 0; padding-left: 1.25rem; }
     li { margin-bottom: 0.5rem; }
     .reading-box {
       background: var(--bg-warm);
       border-left: 4px solid var(--coral);
-      border-radius: 4px;
       padding: 1.5rem;
       margin: 1.5rem 0;
     }
     .reading-box h4 {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: 1.35rem;
       color: var(--cream);
       margin-bottom: 0.75rem;
@@ -113,7 +122,7 @@
       content: counter(q);
       position: absolute;
       left: 0;
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: 1.25rem;
       font-weight: 600;
       color: var(--coral);
@@ -124,6 +133,11 @@
       counter-increment: a;
       padding: 0.75rem 0;
       border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .note-box {
+      background: var(--bg-warm);
+      padding: 1rem 1.5rem;
+      margin-top: 2rem;
     }
     footer {
       margin-top: 3rem;
