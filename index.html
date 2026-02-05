@@ -728,12 +728,12 @@
       position: fixed;
       top: 0;
       right: 0;
-      width: min(720px, 90vw);
+      width: min(860px, 92vw);
       height: 100%;
       background: var(--bg-dark);
       z-index: 1000;
       transform: translateX(100%);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
       overflow-y: auto;
       box-shadow: -10px 0 40px rgba(0, 0, 0, 0.4);
     }
@@ -747,7 +747,7 @@
       position: fixed;
       top: 0;
       right: 0;
-      width: min(720px, 90vw);
+      width: min(860px, 92vw);
       height: 100%;
       pointer-events: none;
       z-index: 0;
@@ -755,15 +755,22 @@
       background-size: 24px 24px;
     }
 
-    .topic-panel-close {
+    .topic-panel-toolbar {
       position: sticky;
       top: 0;
       z-index: 10;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      justify-content: space-between;
       padding: 1.25rem 2rem;
       background: linear-gradient(var(--bg-dark), rgba(44, 36, 33, 0.95));
+    }
+
+    .topic-panel-close {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: none;
       border: none;
       color: var(--coral);
       font-family: 'Source Sans 3', sans-serif;
@@ -771,10 +778,73 @@
       font-weight: 500;
       cursor: pointer;
       transition: gap 0.2s ease;
+      padding: 0;
     }
 
     .topic-panel-close:hover {
       gap: 0.85rem;
+    }
+
+    .topic-panel-save {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: none;
+      border: 1px solid var(--text-light-muted);
+      color: var(--text-light-muted);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.4rem 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .topic-panel-save:hover {
+      border-color: var(--cream);
+      color: var(--cream);
+    }
+
+    .topic-panel-save svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    @media print {
+      body * { visibility: hidden; }
+      .topic-panel, .topic-panel * { visibility: visible; }
+      .topic-panel {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        transform: none;
+        box-shadow: none;
+        background: white;
+      }
+      .topic-panel::before { display: none; }
+      .topic-panel-toolbar { display: none; }
+      .topic-panel-overlay { display: none; }
+      .topic-panel-body {
+        color: #222;
+        padding: 2rem;
+      }
+      .topic-panel-body h1,
+      .topic-panel-body h2,
+      .topic-panel-body h3,
+      .topic-panel-body h4,
+      .topic-panel-body strong { color: #222; }
+      .topic-panel-body p,
+      .topic-panel-body li { color: #444; }
+      .topic-panel-body .topic-num { color: #E07850; }
+      .topic-panel-body .reading-box,
+      .topic-panel-body .note-box {
+        background: #f5f5f5;
+        border-left-color: #E07850;
+      }
+      .topic-panel-body a { color: #E07850; }
+      .topic-panel-body .questions li::before { color: #E07850; }
     }
 
     .topic-panel-body {
@@ -1232,7 +1302,13 @@
   <!-- Topic Panel -->
   <div class="topic-panel-overlay" id="topicOverlay"></div>
   <div class="topic-panel" id="topicPanel">
-    <button class="topic-panel-close" id="topicClose">← Back to overview</button>
+    <div class="topic-panel-toolbar">
+      <button class="topic-panel-close" id="topicClose">← Back to overview</button>
+      <button class="topic-panel-save" id="topicSave">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        Save as PDF
+      </button>
+    </div>
     <div class="topic-panel-body" id="topicBody"></div>
   </div>
 
@@ -1242,6 +1318,7 @@
       const overlay = document.getElementById('topicOverlay');
       const body = document.getElementById('topicBody');
       const closeBtn = document.getElementById('topicClose');
+      const saveBtn = document.getElementById('topicSave');
 
       function openPanel(href) {
         fetch(href)
@@ -1252,6 +1329,11 @@
             // Remove the back-link and footer from fetched content
             content.querySelectorAll('.back-link, footer').forEach(el => el.remove());
             body.innerHTML = content.innerHTML;
+            // Open all links in new tabs
+            body.querySelectorAll('a').forEach(a => {
+              a.setAttribute('target', '_blank');
+              a.setAttribute('rel', 'noopener noreferrer');
+            });
             panel.classList.add('active');
             overlay.classList.add('active');
             document.body.classList.add('panel-open');
@@ -1278,6 +1360,11 @@
 
       closeBtn.addEventListener('click', closePanel);
       overlay.addEventListener('click', closePanel);
+
+      // Save as PDF via print dialog
+      saveBtn.addEventListener('click', function() {
+        window.print();
+      });
 
       // Close on Escape key
       document.addEventListener('keydown', function(e) {
