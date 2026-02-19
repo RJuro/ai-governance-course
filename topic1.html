@@ -134,6 +134,45 @@
       padding: 0.75rem 0;
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
+    .audio-box {
+      background: var(--bg-warm);
+      border-left: 4px solid var(--coral);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .audio-box h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--cream);
+      margin-bottom: 0.25rem;
+    }
+    .audio-box p {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .audio-box audio {
+      width: 100%;
+      margin-bottom: 0.75rem;
+      border-radius: 8px;
+    }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--coral);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--coral);
+      border-radius: 4px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .download-btn:hover {
+      background: var(--coral);
+      color: var(--bg-dark);
+    }
+    .download-btn svg { flex-shrink: 0; }
     .note-box {
       background: var(--bg-warm);
       padding: 1rem 1.5rem;
@@ -188,6 +227,19 @@
       <li>"Machines of Loving Grace" (Amodei, 2024). Earlier essay on AI benefits.</li>
       <li>Anthropic's Constitutional AI paper. Technical safety background.</li>
     </ul>
+
+    <div class="audio-box">
+      <h4>Listen: Zvi on "The Adolescence of Technology"</h4>
+      <p>TTS version of Zvi Mowshowitz's commentary on the Amodei essay.</p>
+      <audio controls preload="metadata">
+        <source src="assets/adolescence_zvi.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <a href="assets/adolescence_zvi.mp3" download class="download-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3"/></svg>
+        Download MP3
+      </a>
+    </div>
 
     <h2>Guiding Questions</h2>
     <div class="questions">
